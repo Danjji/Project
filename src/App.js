@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useRef, useState } from "react";
+import "./App.css";
+import SectionOne from "./Sections/SectionOne";
+import SectionTwo from "./Sections/SectionTwo";
 
-function App() {
+const App = () => {
+  const sectionTwoRef = useRef(null);
+  const [sharedData, setSharedData] = useState(null);
+
+  const handleScrollToSectionTwo = () => {
+    sectionTwoRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SectionOne handleScrollToSectionTwo={handleScrollToSectionTwo} />
+      <div ref={sectionTwoRef}>
+        <SectionTwo setSharedData={setSharedData} />
+      </div>
+      {sharedData && (
+        <div className="sharedData">
+          <h2>Shared Data:</h2>
+          <pre>{JSON.stringify(sharedData, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;

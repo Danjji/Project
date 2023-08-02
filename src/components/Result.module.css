@@ -1,0 +1,218 @@
+/* Result.module.css */
+
+/* 전역 스타일 */
+p,
+h2,
+h3 {
+  color: #fff;
+}
+
+.section-two {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: auto;
+  background-color: #000;
+}
+
+/* Result 컴포넌트 스타일 */
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 세로 방향에서 중앙 정렬 */
+  justify-content: center; /* 가로 방향에서 중앙 정렬 */
+}
+
+.content h3 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.mbti-check-heading {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#nameLabel {
+  color: #fff;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user {
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  cursor: pointer;
+  display: flex; /* 이미지들을 가로로 배열하기 위해 flex로 설정 */
+  flex-direction: column; /* 이미지와 유저 이름을 세로로 정렬하기 위해 flex-direction을 column으로 설정 */
+  align-items: center; /* 이미지와 유저 이름을 가로 방향으로 중앙 정렬하기 위해 align-items를 center로 설정 */
+}
+
+.user p {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.resultImages {
+  cursor: pointer;
+  object-fit: contain;
+  filter: brightness(20%);
+}
+.resultImages img {
+  width: 50px;
+  height: 50px;
+}
+
+/* 선택된 이미지에 적용되는 스타일 */
+.user.selected .resultImages {
+  filter: brightness(100%); /* 이미지 밝기를 100%로 변경 */
+  transition: filter 0.3s ease;
+}
+
+.leftContent {
+  border: 5px solid #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 세로 방향에서 중앙 정렬 */
+  overflow-y: auto;
+}
+
+.rightContent {
+  border: 5px solid #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  color: #fff;
+  height: 584px;
+  overflow-y: auto;
+}
+
+.rightContent::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.savedDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 결과 화면의 궁합 결과를 서서히 표시하기 위한 스타일 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.compatibilityResult {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0; /* 처음에는 투명도를 0으로 설정하여 숨김 */
+}
+
+/* 선택된 유저의 궁합 결과를 서서히 표시하는 스타일 */
+.user.selected .compatibilityResult {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+/* 이미지들을 가로로 배열하기 위한 추가 스타일 */
+.userImages {
+  display: flex;
+  margin-top: 10px; /* 유저 이름과 이미지들 사이에 위쪽 여백 추가 */
+}
+
+.userImages .resultImages {
+  margin-right: 10px; /* 이미지들 사이에 오른쪽 여백 추가 */
+}
+/* Modal 스타일 */
+.modal {
+  /* The modal container */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Make sure the modal appears on top of other elements */
+}
+
+.modalContent {
+  /* The content of the modal */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px; /* Adjust the width as needed */
+  text-align: center;
+  word-break: break-all;
+}
+
+.modalContent h3 {
+  /* Styles for the heading inside the modal */
+  color: #000;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modalContent input {
+  /* Styles for the input field inside the modal */
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  /* Styles for the buttons container inside the modal */
+  display: flex;
+  justify-content: center;
+}
+
+.buttons button {
+  /* Styles for the buttons inside the modal */
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #000; /* Blue color, adjust as needed */
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+  /* Hover effect for the buttons */
+  background-color: #9f9f9f;
+  color: #000; /* Darker blue color on hover, adjust as needed */
+}

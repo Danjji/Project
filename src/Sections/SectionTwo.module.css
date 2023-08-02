@@ -1,0 +1,26 @@
+/* SectionTwo.module.css */
+
+/* 전역 스타일 */
+p,
+h2,
+h3 {
+  color: #fff;
+}
+
+/* 추가 스타일 */
+.sectionTwo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: auto;
+  background-color: #000;
+}
+
+.loading {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
