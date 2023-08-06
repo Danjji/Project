@@ -1,13 +1,13 @@
 // useSharedLogic.js
 import { useState } from "react";
-import I from "../assests/I.png";
-import E from "../assests/E.png";
-import S from "../assests/S.png";
-import N from "../assests/N.png";
-import F from "../assests/F.png";
-import T from "../assests/T.png";
-import P from "../assests/P.png";
-import J from "../assests/J.png";
+import I from "../assets/I.png";
+import E from "../assets/E.png";
+import S from "../assets/S.png";
+import N from "../assets/N.png";
+import F from "../assets/F.png";
+import T from "../assets/T.png";
+import P from "../assets/P.png";
+import J from "../assets/J.png";
 import { mbtiToAlphabet } from "../utils/compatibility";
 import "./useSharedLogic.css";
 

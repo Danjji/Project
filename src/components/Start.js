@@ -1,5 +1,5 @@
 import React from "react";
-import mainImage from "../images/Chemi.png"; // 이미지 파일 임포트
+import mainImage from "../assets/Chemi.png"; // 이미지 파일 임포트
 import styles from "./Start.module.css"; // Start 컴포넌트에 적용할 CSS 스타일 임포트
 
 const Start = ({ handleStart }) => {
