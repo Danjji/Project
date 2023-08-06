@@ -1,11 +1,11 @@
 // SectionTwo.js
 import React from "react";
-import useSharedLogic from "../hook/useSharedLogic"; // useSharedLogic 커스텀 훅스 임포트
-import Start from "../components/Start"; // Start 컴포넌트 임포트
-import Input from "../components/Input"; // Input 컴포넌트 임포트
-import Result from "../components/Result"; // Result 컴포넌트 임포트
-import styles from "./SectionTwo.module.css"; // SectionTwo 컴포넌트에 적용할 CSS 스타일 임포트
-import Loading from "../components/Loading"; // Loading 페이지 컴포넌트
+import useSharedLogic from "../../../hook/useSharedLogic";
+import Start from "../../../components/Start";
+import Input from "../../../components/Input";
+import Result from "../../../components/Result";
+import styles from "./SectionTwo.module.css";
+import Loading from "../../../components/loading/Loading";
 
 const SectionTwo = ({ handleScrollToSectionTwo }) => {
   // useSharedLogic 커스텀 훅스를 사용하여 상태와 함수들을 가져옴
@@ -32,9 +32,7 @@ const SectionTwo = ({ handleScrollToSectionTwo }) => {
   return (
     <div className={styles.sectionTwo}>
       {showLoading ? (
-        <div className={styles.loading}>
-          <Loading />
-        </div>
+        <Loading />
       ) : !showContent && !showResult ? (
         <Start handleStart={handleStart} />
       ) : showContent && !showResult ? (

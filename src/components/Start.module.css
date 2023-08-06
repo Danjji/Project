@@ -1,7 +1,7 @@
 .content {
   display: flex;
-  align-items: center; /* 수직 방향으로 중앙 정렬 */
-  justify-content: center; /* 수평 방향으로 중앙 정렬 */
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   text-align: center;
   height: 100vh;

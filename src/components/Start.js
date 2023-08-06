@@ -19,8 +19,8 @@ const Start = ({ handleStart }) => {
           확인해 보세요.
         </p>{" "}
         {/* 설명 */}
-        <button onClick={handleStart}>시작하기</button>{" "}
         {/* 시작하기 버튼, 'handleStart' 함수 실행 */}
+        <button onClick={handleStart}>시작하기</button>{" "}
       </div>
     </div>
   );

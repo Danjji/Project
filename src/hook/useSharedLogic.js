@@ -1,20 +1,17 @@
 // useSharedLogic.js
 import { useState } from "react";
-import I from "../images/I.png";
-import E from "../images/E.png";
-import S from "../images/S.png";
-import N from "../images/N.png";
-import F from "../images/F.png";
-import T from "../images/T.png";
-import P from "../images/P.png";
-import J from "../images/J.png";
+import I from "../assests/I.png";
+import E from "../assests/E.png";
+import S from "../assests/S.png";
+import N from "../assests/N.png";
+import F from "../assests/F.png";
+import T from "../assests/T.png";
+import P from "../assests/P.png";
+import J from "../assests/J.png";
 import { mbtiToAlphabet } from "../utils/compatibility";
 import "./useSharedLogic.css";
 
-// useSharedLogic 커스텀 훅 선언
-/* 해당 함수들은 여러 컴포넌트에서 사용이 될수 있으므로 코드 중복을 피하기 위해 따로 작성했음 */
-const useSharedLogic = () => {
-  // 상태 변수들 정의
+const useSharedLogic = (satellites) => {
   const [name, setName] = useState("");
   const [selectedImageIndexes, setSelectedImageIndexes] = useState([
     -1, -1, -1, -1,
@@ -24,17 +21,13 @@ const useSharedLogic = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [savedData, setSavedData] = useState([]);
 
-  // MBTI 이미지 파일들을 배열로 정의
   const images = [I, E, S, N, F, T, P, J];
 
-  // 유저 이름 입력 변경 핸들러 함수
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
-  // MBTI 이미지 클릭 핸들러 함수
   const handleImageClick = (rowIndex, imageIndex) => {
-    // 이미지 그룹 정의
     const imageGroups = [
       [0, 1],
       [2, 3],
@@ -42,7 +35,6 @@ const useSharedLogic = () => {
       [6, 7],
     ];
 
-    // 선택된 이미지 인덱스 업데이트
     const updatedSelectedImageIndexes = [...selectedImageIndexes];
 
     imageGroups[rowIndex].forEach((i) => {
@@ -58,12 +50,10 @@ const useSharedLogic = () => {
     setSelectedImageIndexes(updatedSelectedImageIndexes);
   };
 
-  // "시작하기" 버튼 클릭 핸들러 함수
   const handleStart = () => {
     setShowContent(true);
   };
 
-  // "저장하기" 버튼 클릭 핸들러 함수
   const handleSave = () => {
     if (name.trim() === "") {
       alert("이름을 입력해주세요.");
@@ -75,10 +65,8 @@ const useSharedLogic = () => {
       return;
     }
 
-    // MBTI 알파벳으로 변환
     const mbtiType = mbtiToAlphabet(selectedImageIndexes);
 
-    // 새로운 데이터 객체 생성 및 저장
     const newData = {
       name: name,
       mbti: selectedImageIndexes,
@@ -89,7 +77,6 @@ const useSharedLogic = () => {
     setSelectedImageIndexes([-1, -1, -1, -1]);
   };
 
-  // "결과보기" 버튼 클릭 핸들러 함수
   const handleShowResult = () => {
     if (savedData.length === 0) {
       alert("MBTI 타입을 입력해주세요.");
@@ -103,10 +90,13 @@ const useSharedLogic = () => {
     setTimeout(() => {
       setShowResult(true);
       setShowLoading(false);
-    }, 5000);
+    }, 3000);
   };
 
-  // 선택된 이미지들을 렌더링하는 함수
+  const areAllImagesLoaded = () => {
+    return imagesLoaded === satellites.length;
+  };
+
   const renderSelectedImages = () => {
     return selectedImageIndexes.map((imageIndex, rowIndex) => (
       <div key={rowIndex} className="result-images">
@@ -117,7 +107,17 @@ const useSharedLogic = () => {
     ));
   };
 
-  // 저장된 데이터들을 렌더링하는 함수
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImagesLoaded((prev) => prev + 1);
+
+    if (imagesLoaded + 1 === satellites.length) {
+      setAllImagesLoaded(true);
+    }
+  };
+
   const renderSavedData = () => {
     const rows = [];
     for (let i = 0; i < savedData.length; i += 2) {
@@ -148,7 +148,6 @@ const useSharedLogic = () => {
     return rows;
   };
 
-  // 커스텀 훅스에서 사용하는 상태와 함수들을 반환
   return {
     name,
     setName,
@@ -170,6 +169,9 @@ const useSharedLogic = () => {
     handleShowResult,
     renderSelectedImages,
     renderSavedData,
+    areAllImagesLoaded,
+    allImagesLoaded,
+    handleImageLoad,
   };
 };
 

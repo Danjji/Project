@@ -1,30 +1,19 @@
-// App.js
-import React, { useRef, useState } from "react";
+import React from "react";
 import "./App.css";
-import SectionOne from "./Sections/SectionOne";
-import SectionTwo from "./Sections/SectionTwo";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/home/Home";
+import DebateList from "./pages/debate_list/DebateList";
+import SectionTwo from "./pages/home/sections/SectionTwo"; // SectionTwo 컴포넌트 임포트
 
 const App = () => {
-  const sectionTwoRef = useRef(null);
-  const [sharedData, setSharedData] = useState(null);
-
-  const handleScrollToSectionTwo = () => {
-    sectionTwoRef.current.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <div>
-      <SectionOne handleScrollToSectionTwo={handleScrollToSectionTwo} />
-      <div ref={sectionTwoRef}>
-        <SectionTwo setSharedData={setSharedData} />
-      </div>
-      {sharedData && (
-        <div className="sharedData">
-          <h2>Shared Data:</h2>
-          <pre>{JSON.stringify(sharedData, null, 2)}</pre>
-        </div>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/lists" element={<DebateList />} />
+        <Route path="/section2" element={<SectionTwo />} /> {/* 추가 */}
+      </Routes>
+    </Router>
   );
 };
 

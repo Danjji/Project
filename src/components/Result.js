@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { checkCompatibility, mbtiToAlphabet } from "../utils/compatibility";
 import styles from "./Result.module.css";
+import LinkModal from "./LinkModal";
 
 const Result = ({ savedData, images }) => {
   // 모달 상태를 관리하는 상태 변수들
@@ -111,46 +112,44 @@ const Result = ({ savedData, images }) => {
 
   // 링크를 클립보드에 복사하는 함수
   const handleCopyLink = () => {
-    // Copy the link to the clipboard
     navigator.clipboard.writeText(sharedLink);
     setIsLinkModalOpen(false);
   };
 
   return (
-    <div className={styles.content}>
-      {/* 왼쪽 컨텐츠 */}
-      <div className={styles.leftContent}>
-        <h2>Members</h2>
-        {renderUserData()}
-      </div>
-      {/* 오른쪽 컨텐츠 */}
-      <div className={styles.rightContent}>
-        <h2>결과 화면</h2>
-        <div className={styles.savedDataContainer}>
-          {renderCompatibilityResult()}
+    <div className={styles.resultContainer}>
+      <div className={styles.content}>
+        <div className={styles.leftContent}>
+          <h2>Members</h2>
+          {renderUserData()}
         </div>
-        {/* "링크 공유" 버튼 추가 */}
+        <div className={styles.rightContent}>
+          <h2>결과 화면</h2>
+          <div className={styles.savedDataContainer}>
+            {renderCompatibilityResult()}
+          </div>
+        </div>
+      </div>
+
+      {/*미완성 기능 구현 부분*/}
+      <div className={styles.buttonContainer}>
         <button className={styles.shareButton} onClick={handleShareLink}>
           링크 공유
         </button>
+        <button className={styles.saveButton} onClick={""}>
+          저장하기
+        </button>
+        <button className={styles.goBackButton} onClick={""}>
+          이전화면으로 돌아가기
+        </button>
       </div>
-      {/* 링크 공유 모달 */}
+
       {showModal && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <h3>링크 공유</h3>
-            <input
-              type="text"
-              value={sharedLink}
-              readOnly
-              onClick={(e) => e.target.select()}
-            />
-            <div className={styles.buttons}>
-              <button onClick={() => setShowModal(false)}>취소</button>
-              <button onClick={handleCopyLink}>복사</button>
-            </div>
-          </div>
-        </div>
+        <LinkModal
+          sharedLink={sharedLink}
+          handleCopyLink={handleCopyLink}
+          closeModal={() => setShowModal(false)}
+        />
       )}
     </div>
   );

@@ -1,0 +1,17 @@
+.listContainer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+.mainTitle {
+}
+.postList {
+  list-style: none;
+  padding: 0;
+}
+
+.searchResults {
+  list-style: none;
+  padding: 0;
+  color: blue;
+}
