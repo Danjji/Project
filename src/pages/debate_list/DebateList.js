@@ -1,51 +1,53 @@
+//DebateList.js
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import NavBar from "../../components/nav_bar/NavBar";
-import styles from "./DibateList.module.css";
+import styles from "./DebateList.module.css";
+import debateData from "../../utils/debateData"; // Importing the static data
+import { sortByLikes, sortByDate, sortByMessages } from "../../utils/sortUtils"; // Importing the sorting functions
+
+import SearchResults from "../../components/SearchResults"; // Importing the SearchResults component
 
 const DibateList = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [sortOption, setSortOption] = useState(""); // For storing the selected sort option
+  const [searchResults, setSearchResults] = useState(debateData); // Start with all debates as initial results
 
   useEffect(() => {
+    let results = [...debateData];
+
     if (searchKeyword.trim() !== "") {
-      axios.get(`/search?keyword=${searchKeyword}`).then((response) => {
-        setSearchResults(response.data);
-      });
-    } else {
-      setSearchResults([]);
+      results = results.filter((debate) =>
+        debate.title.toLowerCase().includes(searchKeyword.toLowerCase())
+      );
     }
-  }, [searchKeyword]);
+
+    switch (sortOption) {
+      case "likes":
+        results.sort(sortByLikes);
+        break;
+      case "date":
+        results.sort(sortByDate);
+        break;
+      case "messages":
+        results.sort(sortByMessages);
+        break;
+      default:
+        break;
+    }
+
+    setSearchResults(results);
+  }, [searchKeyword, sortOption]);
 
   return (
     <div className={styles.listContainer}>
       <NavBar />
       <h2 className={styles.mainTitle}>전체 토론 주제</h2>
-      <div>
-        <input
-          type="text"
-          value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
-          placeholder="검색어를 입력하세요"
-        />
+      <div className={styles.cardContainer}>
         {searchResults.length > 0 && (
-          <div>
-            <h2>검색 결과</h2>
-            <ul className={styles.searchResults}>
-              {searchResults.map((post) => (
-                <li key={post.id}>{post.title}</li>
-              ))}
-            </ul>
-          </div>
+          <SearchResults results={searchResults} onSortChange={setSortOption} />
         )}
       </div>
-      <ul className={styles.postList}>
-        {searchResults.length > 0 ? (
-          searchResults.map((post) => <li key={post.id}>{post.title}</li>)
-        ) : (
-          <li>검색 결과가 없습니다.</li>
-        )}
-      </ul>
+      <button>토론 글 쓰기</button>
     </div>
   );
 };
