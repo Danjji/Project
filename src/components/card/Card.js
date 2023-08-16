@@ -1,9 +1,11 @@
+//Card.js
 import React from "react";
 import { Link } from "react-router-dom";
+import { calculatePercentage } from "../../utils/calculatePercent";
 import { FaBookmark, FaShare, FaComment, FaThumbsUp } from "react-icons/fa";
 import styles from "./DebateCard.module.css";
 
-const DebateCard = ({ debate }) => {
+const DebateCard = ({ debate, percentageA, percentageB }) => {
   const { title, A, B, messages, likes, isUnderway, hashtags } = debate;
 
   return (
@@ -16,7 +18,9 @@ const DebateCard = ({ debate }) => {
 
       <div className={styles.cardInfo}>
         <h3 className={styles.title}>{title}</h3>
-        <p className={styles.percent}>A. 45% vs B. 51%</p>
+        <p className={styles.percent}>
+          A. {percentageA}% vs B. {percentageB}%
+        </p>
         <div className={styles.options}>
           <p className={styles.option}>{A}</p>
           <p className={styles.option}>{B}</p>
