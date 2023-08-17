@@ -1,3 +1,4 @@
+//App.js
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -12,7 +13,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<DebateList />} />
         <Route path="/debate/:id" element={<DebateDetail />} />
-        <Route path="/section2" element={<SectionTwo />} />
+        {/* <Route path="/section2" element={<SectionTwo />} /> */}
       </Routes>
     </Router>
   );

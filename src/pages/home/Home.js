@@ -1,4 +1,4 @@
-// App.js
+// Home.js
 import React, { useRef, useState } from "react";
 import SectionOne from "./sections/SectionOne";
 import SectionTwo from "./sections/SectionTwo";
