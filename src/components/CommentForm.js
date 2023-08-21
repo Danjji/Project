@@ -9,12 +9,12 @@ const CommentForm = ({ onSubmit }) => {
   const handleSubmit = () => {
     if (newComment && selectedOpinion) {
       const newCommentData = {
-        userId: "tempUser", // 임시로 설정한 값입니다. 실제 사용자 ID로 변경해야 합니다.
-        userImage: "https://yourDefaultUserImageUrl.com", // 사용자 이미지 URL. 필요에 따라 변경해야 합니다.
+        userId: "tempUser",
+        userImage: "https://yourDefaultUserImageUrl.com",
         opinion: selectedOpinion,
         comment: newComment,
-        likes: 0, // 초기 좋아요 수는 0으로 설정
-        date: new Date().toISOString(), // 현재 시간
+        likes: 0,
+        date: new Date().toISOString(),
       };
       onSubmit(newCommentData);
       setNewComment("");

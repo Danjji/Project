@@ -1,16 +1,9 @@
 // useSharedLogic.js
 import { useState } from "react";
 import axios from "axios";
-import I from "../assets/I.png";
-import E from "../assets/E.png";
-import S from "../assets/S.png";
-import N from "../assets/N.png";
-import F from "../assets/F.png";
-import T from "../assets/T.png";
-import P from "../assets/P.png";
-import J from "../assets/J.png";
 import { mbtiToAlphabet } from "../utils/compatibility";
 import "./useSharedLogic.css";
+import styles from "../components/Input.module.css";
 
 const useSharedLogic = (satellites) => {
   const [name, setName] = useState("");
@@ -22,7 +15,7 @@ const useSharedLogic = (satellites) => {
   const [showLoading, setShowLoading] = useState(false);
   const [savedData, setSavedData] = useState([]);
 
-  const images = [I, E, S, N, F, T, P, J];
+  const mbtiTexts = ["I", "E", "S", "N", "F", "T", "P", "J"];
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -98,11 +91,13 @@ const useSharedLogic = (satellites) => {
     return imagesLoaded === satellites.length;
   };
 
-  const renderSelectedImages = () => {
-    return selectedImageIndexes.map((imageIndex, rowIndex) => (
-      <div key={rowIndex} className="result-images">
-        {imageIndex !== -1 && (
-          <img src={images[imageIndex]} alt="" className="result-image" />
+  const renderSelectedTexts = () => {
+    return selectedImageIndexes.map((textIndex, rowIndex) => (
+      <div key={rowIndex} className="result-texts">
+        {textIndex !== -1 && (
+          <span className={rowIndex + "-" + textIndex}>
+            {mbtiTexts[textIndex]}
+          </span>
         )}
       </div>
     ));
@@ -124,22 +119,22 @@ const useSharedLogic = (satellites) => {
     for (let i = 0; i < savedData.length; i += 2) {
       const rowData = savedData.slice(i, i + 2);
       rows.push(
-        <div key={i} className="data-row">
+        <div key={i} className={styles["data-row"]}>
           {rowData.map((data, index) => (
-            <div key={index} className="saved-data">
+            <div key={index} className={styles["saved-data"]}>
               <p>이름: {data.name}</p>
-              <div className="result-images">
-                {data.mbti.map((imageIndex, rowIndex) => (
-                  <div key={rowIndex} className="result-images">
-                    {imageIndex !== -1 && (
-                      <img
-                        src={images[imageIndex]}
-                        alt=""
-                        className="result-image"
-                      />
-                    )}
-                  </div>
-                ))}
+              <div className={styles["result-texts"]}>
+                {data.mbti.map((textIndex, rowIndex) => {
+                  const mbtiType = mbtiTexts[textIndex];
+                  return (
+                    <span
+                      key={rowIndex}
+                      className={`${styles["result-text"]} ${styles[mbtiType]} ${styles["selected"]}`}
+                    >
+                      {mbtiType}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -162,13 +157,13 @@ const useSharedLogic = (satellites) => {
     setShowLoading,
     savedData,
     setSavedData,
-    images,
     handleNameChange,
     handleImageClick,
     handleStart,
     handleSave,
     handleShowResult,
-    renderSelectedImages,
+    mbtiTexts,
+    renderSelectedTexts,
     renderSavedData,
     areAllImagesLoaded,
     allImagesLoaded,

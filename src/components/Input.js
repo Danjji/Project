@@ -10,6 +10,7 @@ const Input = ({
   handleSave,
   renderSavedData,
   handleShowResult,
+  mbtiTexts,
 }) => {
   return (
     <div className={styles.content}>
@@ -28,23 +29,22 @@ const Input = ({
               onChange={handleNameChange}
               placeholder="이름을 입력하세요"
             />
-            <div className={styles["image-grid"]}>
-              {images.map((image, imageIndex) => (
-                <div key={imageIndex} className={styles["image-row"]}>
-                  <img
-                    src={image}
-                    alt=""
-                    className={
-                      selectedImageIndexes[Math.floor(imageIndex / 2)] ===
-                      imageIndex
-                        ? styles.selected
-                        : ""
-                    }
-                    onClick={() =>
-                      handleImageClick(Math.floor(imageIndex / 2), imageIndex)
-                    }
-                  />
-                </div>
+            <div className={styles["text-grid"]}>
+              {mbtiTexts.map((text, textIndex) => (
+                <span
+                  key={textIndex}
+                  className={`${styles[text]} ${
+                    selectedImageIndexes[Math.floor(textIndex / 2)] ===
+                    textIndex
+                      ? `${styles.selected}`
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleImageClick(Math.floor(textIndex / 2), textIndex)
+                  }
+                >
+                  {text}
+                </span>
               ))}
             </div>
           </div>
@@ -53,7 +53,7 @@ const Input = ({
         <div className={styles["right-container"]}>
           <div className={styles["right-content"]}>
             <div className={styles["success-message"]}>Success</div>
-            <div className={styles["saved-data"]}>{renderSavedData()}</div>
+            <div className={styles["result-data"]}>{renderSavedData()}</div>
           </div>
           <button className={styles["result-btn"]} onClick={handleShowResult}>
             결과보기

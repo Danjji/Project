@@ -10,7 +10,9 @@ const SearchResults = ({ results, onSortChange }) => {
   return (
     <div>
       <h2>검색 결과</h2>
-      <SortSelect onSortChange={onSortChange} />
+      <div className={styles.sortSelectContainer}>
+        <SortSelect onSortChange={onSortChange} />
+      </div>
       <div className={styles.cardRow}>
         {results.map((debate) => {
           const commentsForDebate = commentsData[debate.id] || [];

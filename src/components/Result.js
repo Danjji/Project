@@ -3,7 +3,7 @@ import { checkCompatibility, mbtiToAlphabet } from "../utils/compatibility";
 import styles from "./Result.module.css";
 import LinkModal from "./LinkModal";
 
-const Result = ({ savedData, images }) => {
+const Result = ({ savedData, mbtiTexts }) => {
   // 모달 상태를 관리하는 상태 변수들
   const [showModal, setShowModal] = useState(false);
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
@@ -80,20 +80,23 @@ const Result = ({ savedData, images }) => {
 
   // 선택된 이미지를 렌더링하는 함수
   const renderSelectedImages = (mbti, userIndex) => {
-    return mbti.map((imageIndex, rowIndex) => (
-      <div key={rowIndex} className={styles.resultImages}>
-        {imageIndex !== -1 && (
-          <img
-            src={images[imageIndex]}
-            alt=""
-            className={`${styles.resultImage} ${
-              userIndex === selectedUserIndex ? styles.selected : ""
-            }`}
-            onClick={() => setSelectedUserIndex(userIndex)}
-          />
-        )}
-      </div>
-    ));
+    return mbti.map((textIndex, rowIndex) => {
+      const textValue = mbtiTexts[textIndex];
+      if (textIndex !== -1 && textValue) {
+        return (
+          <div key={rowIndex} className={styles.resultTexts}>
+            <span
+              className={`${styles.resultText} ${styles[textValue]}
+              ${userIndex === selectedUserIndex ? styles.selected : ""}`}
+              onClick={() => setSelectedUserIndex(userIndex)}
+            >
+              {textValue}
+            </span>
+          </div>
+        );
+      }
+      return null;
+    });
   };
 
   // 링크 공유 버튼 클릭 시 실행되는 함수
@@ -136,10 +139,10 @@ const Result = ({ savedData, images }) => {
         <button className={styles.shareButton} onClick={handleShareLink}>
           링크 공유
         </button>
-        <button className={styles.saveButton} onClick={""}>
+        <button className={styles.saveButton} onClick={() => {}}>
           저장하기
         </button>
-        <button className={styles.goBackButton} onClick={""}>
+        <button className={styles.goBackButton} onClick={() => {}}>
           이전화면으로 돌아가기
         </button>
       </div>

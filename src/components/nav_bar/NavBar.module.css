@@ -5,16 +5,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo {
   width: 130px;
   height: 50px;
   margin-top: 10px;
-  margin-right: 2rem; /* Adjust this as per requirement */
+  margin-right: 2rem;
 }
 
 .navList {
+  flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -42,4 +45,20 @@
 
 .navItem:first-child {
   margin-left: auto;
+}
+@media (max-width: 768px) {
+  .navBar {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navList {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navItem {
+    margin-right: 0;
+  }
 }

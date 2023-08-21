@@ -28,6 +28,7 @@ const SectionTwo = ({ handleScrollToSectionTwo }) => {
     handleShowResult,
     renderSelectedImages,
     renderSavedData,
+    mbtiTexts, // 추가된 부분
   } = useSharedLogic();
   return (
     <div className={styles.sectionTwo}>
@@ -40,14 +41,14 @@ const SectionTwo = ({ handleScrollToSectionTwo }) => {
           name={name}
           handleNameChange={handleNameChange}
           selectedImageIndexes={selectedImageIndexes}
-          images={images}
           handleImageClick={handleImageClick}
           handleSave={handleSave}
           renderSavedData={renderSavedData}
           handleShowResult={handleShowResult}
+          mbtiTexts={mbtiTexts}
         />
       ) : showContent && showResult ? (
-        <Result savedData={savedData} images={images} />
+        <Result savedData={savedData} mbtiTexts={mbtiTexts} />
       ) : null}
     </div>
   );

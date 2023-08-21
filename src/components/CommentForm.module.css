@@ -1,14 +1,14 @@
 .inputContainer {
   display: flex;
   margin: 20px 280px;
-  align-items: center; /* 버튼과 입력 필드를 중앙 정렬 */
+  align-items: center;
 }
 
 .opinionButton,
 .commentInput,
 .submitButton {
-  height: 40px; /* 버튼과 입력 필드의 높이를 동일하게 설정 */
-  box-sizing: border-box; /* 패딩과 테두리를 요소의 전체 크기에 포함 */
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .opinionButton {
